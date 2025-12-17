@@ -4,9 +4,10 @@
 using namespace std;
 
 int main() {
-    cout << "| Начало работы ЧИНАР |" << endl;
+    cout << "| Начало работы ЧИНАР |\n";
     CafeApp app;
     app.run();
-    cout << "| Конец |" << endl;
+    cout << "| Конец |\n";
+    system("pause");
     return 0;
 }

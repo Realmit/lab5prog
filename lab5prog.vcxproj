@@ -132,6 +132,7 @@
     <ClInclude Include="CafeInfoActivity.h" />
     <ClInclude Include="ContactHandler.h" />
     <ClInclude Include="MenuActivity.h" />
+    <ClInclude Include="PremiumMenuActivity.h" />
     <ClInclude Include="ReservationActivity.h" />
     <ClInclude Include="ReviewActivity.h" />
   </ItemGroup>
