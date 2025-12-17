@@ -8,6 +8,7 @@ int main() {
     CafeApp app;
     app.run();
     cout << "| Конец |\n";
+
     system("pause");
     return 0;
 }

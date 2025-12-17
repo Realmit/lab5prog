@@ -42,6 +42,7 @@ public:
 
     void send(const string& contact) const {
         cout << "Отправка брони через " << contact << "...\n";
+
         cout << selected.date << ' ' << selected.time
             << ", гостей: " << selected.guests
             << ", тип: " << selected.type << '\n';

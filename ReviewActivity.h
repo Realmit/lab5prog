@@ -22,6 +22,7 @@ public:
     ReviewActivity(const ReviewActivity& other)
         : Activity(other), count(other.count), userText(other.userText) {
         reviews = make_unique<string[]>(MAX);
+
         for (int i = 0; i < count; ++i)
             reviews[i] = other.reviews[i];
     }

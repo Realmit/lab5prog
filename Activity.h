@@ -17,6 +17,7 @@ public:
         cout << "=== " << title << " ===" << endl;
     }
 
+
     // Виртуальный метод для полиморфного вывода.
     virtual ostream& print(ostream& os) const {
         os << "Активность: " << title;

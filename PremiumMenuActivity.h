@@ -38,6 +38,7 @@ public:
         if (this == &base) return *this;
         MenuActivity::operator=(base); 
         return *this;
+
     }
 
     // Запрет присваивания копированием: удалён.

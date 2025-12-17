@@ -56,6 +56,7 @@ protected:
         if (this != &other) {
             dailySpecial = other.dailySpecial;
         }
+
         return *this;
     }
 
