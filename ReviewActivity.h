@@ -9,7 +9,6 @@ class ReviewActivity : public Activity {
 public:
     static const int MAX = 10;
     static const string templates[5];
-
 private:
     unique_ptr<string[]> reviews; // Использование unique_ptr для управления памятью
 

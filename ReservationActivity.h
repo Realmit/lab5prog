@@ -52,7 +52,6 @@ public:
         selected = { date, time, guests, type };
         cout << "Бронь выбрана: " << date << " " << time << " (" << type << ")" << endl;
     }
-
     // Отправка бронирования через указанный контакт
     void send(const string& contact) const {
         cout << "Отправляем бронь через " << contact << "..." << endl;

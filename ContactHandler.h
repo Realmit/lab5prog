@@ -48,7 +48,6 @@ public:
             throw out_of_range("Индекс контакта выходит за пределы");
         return { names[index], links[index] };
     }
-
     // Перегрузка оператора += для добавления нового контакта
     ContactHandler& operator+=(const pair<string, string>& newContact) {
         // В реальной реализации здесь нужно было бы расширить массивы,

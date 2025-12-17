@@ -24,7 +24,6 @@ public:
         reservation = make_unique<ReservationActivity>();
         contacts = make_unique<ContactHandler>();
     }
-
     void run() {
         try {
             // Обновление статуса кафе (14:00 - открыто)
