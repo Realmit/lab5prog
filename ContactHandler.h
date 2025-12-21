@@ -1,70 +1,24 @@
 #pragma once
-#include <iostream>
+#include <map>
 #include <string>
-#include <stdexcept>
-using namespace std;
+#include <memory>
+#include "IContactOpener.h"
 
 class ContactHandler {
+private:
+    struct ContactEntry {
+        std::string link;
+        std::unique_ptr<IContactOpener> opener;
+    };
+    std::map<std::string, ContactEntry> contacts;
+    std::string lastOpened;
+
 public:
-    static const int COUNT = 4;
+    ContactHandler();
+    void addContact(const std::string& name, const std::string& link, std::unique_ptr<IContactOpener> opener);
+    void showContacts() const;
+    void openContact(const std::string& name);
+    const std::string& getLastOpenedContact() const;
 
-    static const string names[COUNT];
-    static const string links[COUNT];
-
-    string lastOpened;
-
-    // Конструктор по умолчанию
-    ContactHandler() : lastOpened("") {}
-
-    // Конструктор копирования
-    ContactHandler(const ContactHandler& other) : lastOpened(other.lastOpened) {}
-
-    // Отображение контактов
-    void showContacts() const {
-        cout << "Доступные контакты:" << endl;
-        for (int i = 0; i < COUNT; i++)
-            cout << "- " << names[i] << " : " << links[i] << endl;
-    }
-
-    // Открытие контакта
-    void openContact(const string& name) {
-        for (int i = 0; i < COUNT; i++) {
-            if (names[i] == name) {
-                lastOpened = name;
-                cout << "Открываем контакт: " << names[i] << " → " << links[i] << endl;
-                return;
-            }
-        }
-        throw runtime_error("Контакт '" + name + "' не найден!");
-    }
-
-    const string& getLastOpenedContact() const {
-        return lastOpened;
-    }
-
-    // Перегрузка оператора [] для доступа к контактам
-    pair<string, string> operator[](int index) const {
-        if (index < 0 || index >= COUNT)
-            throw out_of_range("Индекс контакта выходит за пределы");
-        return { names[index], links[index] };
-    }
-    // Перегрузка оператора += для добавления нового контакта
-    ContactHandler& operator+=(const pair<string, string>& newContact) {
-        // В реальной реализации здесь нужно было бы расширить массивы,
-        // но для демонстрации просто покажем сообщение
-        cout << "Добавлен контакт: " << newContact.first << " -> " << newContact.second << endl;
-        return *this;
-    }
-};
-
-// Инициализация контактов
-const string ContactHandler::names[COUNT] = {
-    "Email", "WhatsApp", "Instagram", "Phone"
-};
-
-const string ContactHandler::links[COUNT] = {
-    "mailto:chinarcity@example.com",
-    "https://wa.me/79998765432",
-    "https://instagram.com/cafe_chinar",
-    "tel:+79998765432"
+    static std::unique_ptr<IContactOpener> createOpener(const std::string& type);
 };

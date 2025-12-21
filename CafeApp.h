@@ -17,12 +17,11 @@ private:
 
 public:
     CafeApp() {
-        // Инициализация смарт-указателей
-        cafe = make_shared<CafeInfoActivity>();
-        menu = make_unique<MenuActivity>();
-        reviews = make_unique<ReviewActivity>();
-        reservation = make_unique<ReservationActivity>();
-        contacts = make_unique<ContactHandler>();
+        cafe = std::make_shared<CafeInfoActivity>();
+        menu = std::make_unique<MenuActivity>();
+        reviews = std::make_unique<ReviewActivity>();
+        reservation = std::make_unique<ReservationActivity>();
+        contacts = std::make_unique<ContactHandler>(); // теперь auto-конфигурируется
     }
     void run() {
         try {

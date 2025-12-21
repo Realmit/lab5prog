@@ -131,12 +131,22 @@
     <ClInclude Include="CafeApp.h" />
     <ClInclude Include="CafeInfoActivity.h" />
     <ClInclude Include="ContactHandler.h" />
+    <ClInclude Include="EmailOpener.h" />
+    <ClInclude Include="IContactOpener.h" />
+    <ClInclude Include="InstagramOpener.h" />
     <ClInclude Include="MenuActivity.h" />
+    <ClInclude Include="PhoneOpener.h" />
     <ClInclude Include="ReservationActivity.h" />
     <ClInclude Include="ReviewActivity.h" />
+    <ClInclude Include="WhatsAppOpener.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="ContactHandler.cpp" />
+    <ClCompile Include="EmailOpener.cpp" />
+    <ClCompile Include="InstagramOpener.cpp" />
     <ClCompile Include="main.cpp" />
+    <ClCompile Include="PhoneOpener.cpp" />
+    <ClCompile Include="WhatsAppOpener.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
