@@ -2,53 +2,67 @@
 #include <iostream>
 #include <string>
 #include <stdexcept>
-using namespace std;
+#include "Activity.h" 
 
-class ReservationActivity {
+class ReservationActivity : public Activity {  
 public:
     struct Reservation {
-        string date;
-        string time;
+        std::string date;
+        std::string time;
         int guests;
-        string type;
+        std::string type;
 
         friend bool operator==(const Reservation& a, const Reservation& b) {
             return a.date == b.date && a.time == b.time &&
                 a.guests == b.guests && a.type == b.type;
         }
 
-        friend ostream& operator<<(ostream& os, const Reservation& r) {
-            os << r.date << ' ' << r.time
+        friend std::ostream& operator<<(std::ostream& os, const Reservation& r) {
+            os << r.date << " " << r.time
                 << ", гостей: " << r.guests
                 << ", тип: " << r.type;
             return os;
         }
     };
 
-    static const string availableTimeSlots[6];
+    static const std::string availableTimeSlots[6];
     Reservation selected;
 
-    ReservationActivity() = default;
+    ReservationActivity() : Activity("Бронирование") {} 
 
-    void select(const string& date, const string& time, int guests, const string& type) {
-        bool ok = false;
-        for (const auto& slot : availableTimeSlots)
-            if (slot == time) { ok = true; break; }
-        if (!ok)
-            throw invalid_argument("Неверное время: " + time);
+    void select(const std::string& date,
+        const std::string& time,
+        int guests,
+        const std::string& type) {
+        bool validTime = false;
+        for (const auto& slot : availableTimeSlots) {
+            if (slot == time) {
+                validTime = true;
+                break;
+            }
+        }
+
+        if (!validTime)
+            throw std::invalid_argument("Неверное время: " + time);
+
         selected = { date, time, guests, type };
-        cout << "Бронь выбрана: " << date << " " << time << " (" << type << ")\n";
+        std::cout << "Бронь выбрана: " << date << " " << time << " (" << type << ")" << std::endl;
     }
 
-    void send(const string& contact) const {
-        cout << "Отправка брони через " << contact << "...\n";
+    void send(const std::string& contact) const {
+        std::cout << "Отправляем бронь через " << contact << "..." << std::endl;
+        std::cout << "Дата: " << selected.date << std::endl;
+        std::cout << "Время: " << selected.time << std::endl;
+        std::cout << "Гостей: " << selected.guests << std::endl;
+        std::cout << "Тип: " << selected.type << std::endl;
+    }
 
-        cout << selected.date << ' ' << selected.time
-            << ", гостей: " << selected.guests
-            << ", тип: " << selected.type << '\n';
+    friend std::ostream& operator<<(std::ostream& os, const ReservationActivity& r) {
+        os << "Текущая бронь:\n" << r.selected;
+        return os;
     }
 };
 
-const string ReservationActivity::availableTimeSlots[6] = {
+const std::string ReservationActivity::availableTimeSlots[6] = {
     "11:00", "13:30", "15:00", "17:30", "19:30", "21:00"
 };

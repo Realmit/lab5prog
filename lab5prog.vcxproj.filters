@@ -36,7 +36,19 @@
     <ClInclude Include="CafeApp.h">
       <Filter>Файлы заголовков</Filter>
     </ClInclude>
-    <ClInclude Include="PremiumMenuActivity.h">
+    <ClInclude Include="ReviewBase.h">
+      <Filter>Файлы заголовков</Filter>
+    </ClInclude>
+    <ClInclude Include="StringReview.h">
+      <Filter>Файлы заголовков</Filter>
+    </ClInclude>
+    <ClInclude Include="RatingReview.h">
+      <Filter>Файлы заголовков</Filter>
+    </ClInclude>
+    <ClInclude Include="Utils.h">
+      <Filter>Файлы заголовков</Filter>
+    </ClInclude>
+    <ClInclude Include="ReviewContainer.h">
       <Filter>Файлы заголовков</Filter>
     </ClInclude>
   </ItemGroup>

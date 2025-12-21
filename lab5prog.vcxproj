@@ -104,6 +104,7 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
+      <LanguageStandard>stdcpp20</LanguageStandard>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -132,9 +133,13 @@
     <ClInclude Include="CafeInfoActivity.h" />
     <ClInclude Include="ContactHandler.h" />
     <ClInclude Include="MenuActivity.h" />
-    <ClInclude Include="PremiumMenuActivity.h" />
+    <ClInclude Include="RatingReview.h" />
     <ClInclude Include="ReservationActivity.h" />
     <ClInclude Include="ReviewActivity.h" />
+    <ClInclude Include="ReviewBase.h" />
+    <ClInclude Include="ReviewContainer.h" />
+    <ClInclude Include="StringReview.h" />
+    <ClInclude Include="Utils.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp" />

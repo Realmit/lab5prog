@@ -1,66 +1,85 @@
+// ReviewActivity.h
 #pragma once
 #include <iostream>
 #include <string>
 #include <memory>
 #include "CafeInfoActivity.h"
-using namespace std;
 
 class ReviewActivity : public Activity {
 public:
     static const int MAX = 10;
+    static const std::string templates[5];
 
 private:
-    unique_ptr<string[]> reviews;
-    int count = 0;
-    string userText;
+    std::unique_ptr<std::string[]> reviews;
 
 public:
-    ReviewActivity() : Activity("Отзывы") {
-        reviews = make_unique<string[]>(MAX);
+    int count;
+    std::string userText;
+
+    ReviewActivity()
+        : Activity("Отзывы"), count(0), userText("") {
+        reviews = std::make_unique<std::string[]>(MAX);
     }
 
     ReviewActivity(const ReviewActivity& other)
-        : Activity(other), count(other.count), userText(other.userText) {
-        reviews = make_unique<string[]>(MAX);
-
-        for (int i = 0; i < count; ++i)
+        : Activity(other.title), count(other.count), userText(other.userText) {
+        reviews = std::make_unique<std::string[]>(MAX);
+        for (int i = 0; i < other.count; i++)
             reviews[i] = other.reviews[i];
     }
 
-    void editReview(const string& text) {
+    void editReview(const std::string& text) {
         userText = text;
     }
 
     void submit() {
         if (userText.empty())
-            throw runtime_error("Пустой отзыв!");
+            throw std::string("Пустой отзыв!");
         if (count >= MAX)
-            throw runtime_error("Хранилище отзывов заполнено!");
+            throw std::string("Хранилище отзывов заполнено!");
         reviews[count++] = userText;
-        userText.clear();
+        userText = "";
     }
 
     void submitForCafe(const CafeInfoActivity& cafe) {
         if (userText.empty())
-            throw runtime_error("Отзыв пуст!");
+            throw std::string("Отзыв пуст!");
         reviews[count++] = cafe.cafeDetails.name + ": " + userText;
-        userText.clear();
+        userText = "";
     }
 
     void showAll() const {
         showTitle();
-        for (int i = 0; i < count; ++i)
-            cout << "- " << reviews[i] << '\n';
+        for (int i = 0; i < count; i++)
+            std::cout << "- " << reviews[i] << std::endl;
     }
 
-    void execute() const override {
-        showAll();
-    }
-
-    friend ostream& operator<<(ostream& os, const ReviewActivity& r) {
+    friend std::ostream& operator<<(std::ostream& os, const ReviewActivity& r) {
         os << "Отзывы (" << r.count << "):\n";
-        for (int i = 0; i < r.count; ++i)
-            os << "- " << r.reviews[i] << '\n';
+        for (int i = 0; i < r.count; i++)
+            os << "- " << r.reviews[i] << std::endl;
         return os;
     }
+
+    ReviewActivity& operator+=(const std::string& review) {
+        if (count < MAX) reviews[count++] = review;
+        return *this;
+    }
+
+    bool operator==(const ReviewActivity& other) const {
+        if (count != other.count) return false;
+        for (int i = 0; i < count; i++) {
+            if (reviews[i] != other.reviews[i]) return false;
+        }
+        return true;
+    }
+};
+
+const std::string ReviewActivity::templates[5] = {
+    "Отлично!",
+    "Вкусно!",
+    "Медленно",
+    "Хорошо",
+    "Уютно"
 };

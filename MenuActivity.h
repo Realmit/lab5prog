@@ -1,68 +1,57 @@
 #pragma once
 #include <iostream>
 #include <string>
-#include <stdexcept>
 #include "Activity.h"
-using namespace std;
 
-// Производный класс: реализует абстрактный метод execute().
 class MenuActivity : public Activity {
 public:
     static const int MENU_SIZE = 6;
-    static const string items[MENU_SIZE];
+    static const std::string items[MENU_SIZE];
 
-private:
-    string dailySpecial;
+    std::string dailySpecial;
 
-public:
-    // Конструктор с вызовом конструктора базового класса.
-    MenuActivity(const string& title = "Меню", const string& special = "")
-        : Activity(title), dailySpecial(special) {}
+    MenuActivity() : Activity("Меню"), dailySpecial("") {}
 
-    // Перегрузка виртуального метода с вызовом базового варианта.
-    void showTitle() const override {
-        Activity::showTitle(); // вызов метода базового класса
-        cout << "Тип: Стандартное меню\n";
-    }
+    MenuActivity(const MenuActivity& other)
+        : Activity(other.title), dailySpecial(other.dailySpecial) {}
 
-    void execute() const override {
-        cout << "Меню:\n";
-        for (int i = 0; i < MENU_SIZE; ++i)
-            cout << "- " << items[i] << '\n';
-        cout << "Блюдо дня: " << (dailySpecial.empty() ? "не задано" : dailySpecial) << '\n';
-    }
-
-    void setDailySpecial(const string& sp) {
+    void setDailySpecial(const std::string& sp) {
         dailySpecial = sp;
+        std::cout << "Новое блюдо дня установлено: " << dailySpecial << std::endl;
     }
 
-    const string& operator[](int index) const {
-        if (index < 0 || index >= MENU_SIZE)
-            throw out_of_range("Индекс вне диапазона");
-        return items[index];
+    void showMenu() const {
+        showTitle();
+        for (int i = 0; i < MENU_SIZE; i++)
+            std::cout << "- " << items[i] << std::endl;
+        std::cout << "Блюдо дня: " << dailySpecial << std::endl;
     }
 
-    // Поверхностное клонирование: возвращает указатель на копию объекта.
-    virtual unique_ptr<MenuActivity> clone() const {
-        return make_unique<MenuActivity>(*this);
+    const std::string& operator[](int index) const {
+        if (index >= 0 && index < MENU_SIZE)
+            return items[index];
+        throw std::string("Индекс выходит за пределы меню");
     }
 
-    // Запрет конструктора копирования по умолчанию: явно объявлен, но не определён как deleted,
-    MenuActivity(const MenuActivity& other) = default;
-
-protected:
-    // Защищённый оператор присваивания: можно вызывать из производных классов, но не извне.
-    MenuActivity& operator=(const MenuActivity& other) {
-        if (this != &other) {
-            dailySpecial = other.dailySpecial;
-        }
-
-        return *this;
+    MenuActivity operator+(const MenuActivity& other) const {
+        MenuActivity result(*this);
+        if (!dailySpecial.empty() && !other.dailySpecial.empty())
+            result.dailySpecial = dailySpecial + " + " + other.dailySpecial;
+        else
+            result.dailySpecial = dailySpecial.empty() ? other.dailySpecial : dailySpecial;
+        return result;
     }
 
+    friend std::ostream& operator<<(std::ostream& os, const MenuActivity& menu) {
+        os << menu.title << ":\n";
+        for (int i = 0; i < menu.MENU_SIZE; i++)
+            os << "- " << menu.items[i] << std::endl;
+        os << "Блюдо дня: " << menu.dailySpecial;
+        return os;
+    }
 };
 
-const string MenuActivity::items[MENU_SIZE] = {
+const std::string MenuActivity::items[MenuActivity::MENU_SIZE] = {
     "Суп-харчо — 320 руб.",
     "Салат Греческий — 280 руб.",
     "Филе лосося — 650 руб.",
