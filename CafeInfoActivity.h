@@ -54,6 +54,7 @@ public:
         std::cout << "Создано объектов CafeInfoActivity: " << cafesCreated << std::endl;
     }
 
+
     friend void showOwner(const CafeInfoActivity& cafe);
 
     bool operator==(const CafeInfoActivity& other) const {

@@ -67,6 +67,7 @@ public:
         return *this;
     }
 
+
     bool operator==(const ReviewActivity& other) const {
         if (count != other.count) return false;
         for (int i = 0; i < count; i++) {

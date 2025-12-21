@@ -43,6 +43,7 @@ public:
         for (const auto& r : reviews) {
             if (pred(*r)) res.push_back(r.get());
         }
+
         return res;
     }
 

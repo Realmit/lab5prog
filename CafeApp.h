@@ -113,6 +113,7 @@ public:
             reviews->showAll();
             std::cout << "\n" << *reviews << std::endl;
 
+
             ReviewActivity reviews2 = *reviews;
             if (*reviews == reviews2) { 
                 std::cout << "Отзывы идентичны!" << std::endl;

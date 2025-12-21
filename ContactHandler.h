@@ -37,6 +37,7 @@ public:
         return lastOpened;
     }
 
+
     std::pair<std::string, std::string> operator[](int index) const {
         if (index < 0 || index >= COUNT)
             throw std::out_of_range("Индекс контакта выходит за пределы");

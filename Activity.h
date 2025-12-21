@@ -20,6 +20,7 @@ public:
         return os;
     }
 
+
     friend std::ostream& operator<<(std::ostream& os, const Activity& activity) {
         return activity.print(os);
     }

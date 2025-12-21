@@ -4,6 +4,7 @@
 
 class RatingReview : public IReviewable {
     double rating;
+
     std::string category;
 
 public:
