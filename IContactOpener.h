@@ -1,6 +1,7 @@
 #pragma once
 #include <string>
 
+
 class IContactOpener {
 public:
     virtual ~IContactOpener() = default;

@@ -15,6 +15,7 @@ private:
 
 public:
     ContactHandler();
+
     void addContact(const std::string& name, const std::string& link, std::unique_ptr<IContactOpener> opener);
     void showContacts() const;
     void openContact(const std::string& name);

@@ -73,6 +73,7 @@ public:
         return os;
     }
 
+
     // Перегрузка оператора += для добавления отзыва
     ReviewActivity& operator+=(const string& review) {
         if (count < MAX) {

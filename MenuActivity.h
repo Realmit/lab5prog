@@ -46,6 +46,7 @@ public:
         result.dailySpecial += " + " + other.dailySpecial;
         return result;
     }
+
     // Перегрузка оператора вывода
     friend ostream& operator<<(ostream& os, const MenuActivity& menu) {
         os << menu.title << ":\n";

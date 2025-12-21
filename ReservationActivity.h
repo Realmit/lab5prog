@@ -46,6 +46,7 @@ public:
             }
         }
 
+
         if (!validTime)
             throw invalid_argument("Неверное время: " + time);
 

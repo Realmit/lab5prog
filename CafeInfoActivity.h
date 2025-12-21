@@ -81,6 +81,7 @@ public:
         else if (cafeDetails.feature2.empty()) {
             cafeDetails.feature2 = feature;
         }
+
         else if (cafeDetails.feature1.empty()) {
             cafeDetails.feature1 = feature;
         }
